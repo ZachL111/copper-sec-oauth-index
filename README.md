@@ -1,68 +1,40 @@
 # copper-sec-oauth-index
 
-`copper-sec-oauth-index` explores security tooling in PHP. The repository keeps the core rule set compact, then surrounds it with examples that show how the decisions move.
-
-## Copper Sec Oauth Index Notes
-
-The quickest review path is the verifier first, then the fixtures, then the operations note. That order makes it easy to see whether the code, data, and explanation still agree.
-
-## Implementation Notes
-
-The core is a scoring model over demand, capacity, latency, risk, and weight. That keeps trust boundaries, policy checks, and replay guards in one explicit decision path. The threshold is 158, with risk penalty 4, latency penalty 4, and weight bonus 5. The PHP implementation uses strict types and a small namespaced policy class.
+`copper-sec-oauth-index` explores security tooling with a small PHP codebase and local fixtures. The technical goal is to implement a PHP security tooling project for oauth resource planning, using capacity fixtures and allocation and spill reports.
 
 ## Why This Exists
 
-This project keeps the domain idea close to the tests. That makes it useful as a reference implementation, a small experiment, or a starting point for a more specialized tool.
+The point is to make a small domain rule concrete enough that a reader can change it and immediately see what broke.
 
-## Feature Notes
+## Copper Sec Oauth Index Review Notes
 
-- Uses fixture data to keep policy checks changes visible in code review.
-- Includes extended examples for replay guards, including `surge` and `degraded`.
-- Documents claim validation tradeoffs in `docs/operations.md`.
-- Runs locally with a single verification command and no external credentials.
-- Stores project constants and verification metadata in `metadata/project.json`.
+For a quick review, compare `policy width` with `trust boundary` before reading the middle cases.
 
-## Example Scenarios
+## Capabilities
 
-The examples are meant to be readable before they are exhaustive. They cover enough variation to show how latency and risk can pull a decision below the threshold.
+- `fixtures/domain_review.csv` adds cases for trust boundary and claim drift.
+- `metadata/domain-review.json` records the same cases in structured form.
+- `config/review-profile.json` captures the read order and the two review questions.
+- `examples/copper-sec-oauth-walkthrough.md` walks through the case spread.
+- The PHP code includes a review path for `policy width` and `trust boundary`.
+- `docs/field-notes.md` explains the strongest and weakest cases.
 
-## Code Tour
+## Implementation Shape
 
-- `src`: primary implementation
-- `tests`: verification harness
-- `fixtures`: compact golden scenarios
-- `examples`: expanded scenario set
-- `metadata`: project constants and verification metadata
-- `docs`: operations and extension notes
-- `scripts`: local verification and audit commands
+The fixture data drives the tests. The code stays thin, while `metadata/domain-review.json` and `config/review-profile.json` explain what each case is meant to protect.
 
-## Local Setup
+The added PHP path is deliberately direct, with fixtures doing most of the explaining.
 
-Use a normal shell with PHP available on `PATH`. The verifier is written as a PowerShell script because the portfolio was assembled on Windows.
-
-## Try It
+## Local Usage
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-This runs the language-level build or test path against the compact fixture set.
+## Verification
 
-## Tests
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
-```
-
-The audit command checks repository structure and README constraints before it delegates to the verifier.
-
-## Boundaries
-
-The repository favors determinism over breadth. It does not pull live data, keep secrets, or depend on network access for verification.
+That command is also the regression path. It verifies the domain cases and catches mismatches between the CSV, metadata, and code.
 
 ## Roadmap
 
-- Add a loader for `examples/extended_cases.csv` and promote selected cases into the language test suite.
-- Add a short report command that prints the score breakdown for a single scenario.
-- Add malformed input fixtures so the failure path is as visible as the happy path.
-- Add one more security tooling fixture that focuses on a malformed or borderline input.
+The fixture set is small enough to audit by hand. The next useful expansion is malformed input coverage, not extra surface area.

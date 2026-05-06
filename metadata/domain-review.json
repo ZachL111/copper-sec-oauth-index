@@ -1,0 +1,73 @@
+{
+  "repo": "copper-sec-oauth-index",
+  "language": "PHP",
+  "category": "Security tooling",
+  "goal": "Implement a PHP security tooling project for oauth resource planning, using capacity fixtures and allocation and spill reports.",
+  "review_model": {
+    "terms": [
+      "trust boundary",
+      "claim drift",
+      "replay exposure",
+      "policy width"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "trust boundary",
+      "signal": 56,
+      "slack": 48,
+      "drag": 29,
+      "confidence": 53,
+      "score": 126,
+      "lane": "watch"
+    },
+    {
+      "name": "stress",
+      "focus": "claim drift",
+      "signal": 45,
+      "slack": 39,
+      "drag": 25,
+      "confidence": 84,
+      "score": 138,
+      "lane": "watch"
+    },
+    {
+      "name": "edge",
+      "focus": "replay exposure",
+      "signal": 82,
+      "slack": 47,
+      "drag": 17,
+      "confidence": 79,
+      "score": 239,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "policy width",
+      "signal": 84,
+      "slack": 45,
+      "drag": 13,
+      "confidence": 91,
+      "score": 265,
+      "lane": "ship"
+    },
+    {
+      "name": "stale",
+      "focus": "trust boundary",
+      "signal": 76,
+      "slack": 43,
+      "drag": 9,
+      "confidence": 56,
+      "score": 224,
+      "lane": "ship"
+    }
+  ]
+}
