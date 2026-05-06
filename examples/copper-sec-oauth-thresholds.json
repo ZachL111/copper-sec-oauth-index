@@ -1,0 +1,17 @@
+{
+  "repo": "copper-sec-oauth-index",
+  "thresholds": {
+    "signal": 2,
+    "slack": 2,
+    "confidence": 2,
+    "drag": 3,
+    "ship": 152,
+    "watch": 105
+  },
+  "terms": [
+    "trust boundary",
+    "claim drift",
+    "replay exposure",
+    "policy width"
+  ]
+}
